@@ -4,35 +4,48 @@ using UnityEngine;
 
 public class CounterTime : MonoBehaviour
 {
-    public event Action ActionChange;
-
     private int _value = 0;
-    private int _count;
+    private float _stepInTime = 0.5f;
+    private bool _isAction = false;
+    private Coroutine _timeFlowCoroutine;
+
+    public event Action Clicked;
 
     public int Value => _value;
 
-    private void Start()
+    private void Update()
     {
-        StartCoroutine(TimeFlow());
+        Action();        
+    }
+
+    public void Action()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            _isAction = !_isAction;
+
+            if (_isAction == true) 
+            {
+                _timeFlowCoroutine = StartCoroutine(TimeFlow()); 
+            }
+            else
+            {
+                StopCoroutine(_timeFlowCoroutine); 
+            }
+        }
     }
 
     private IEnumerator TimeFlow()
     {
+        var wait = new WaitForSeconds(_stepInTime);
+
         while (true)
         {
-            _value += _count;
+            _value++;
 
-            ActionChange?.Invoke();
+            Clicked?.Invoke();
 
-            yield return new WaitForSeconds(0.5f);
+            yield return wait;
         }
-    }
-
-    public void Action(bool isWork)
-    {
-        if (isWork == true)
-            _count = 1;
-        else
-            _count = 0;        
     }
 }

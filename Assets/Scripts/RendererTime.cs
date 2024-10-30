@@ -8,12 +8,12 @@ public class RendererTime : MonoBehaviour
 
     private void OnEnable()
     {
-        _counterTime.ActionChange += DisplayTime;
+        _counterTime.Clicked += DisplayTime;
     }
 
     private void OnDisable()
     {
-        _counterTime.ActionChange -= DisplayTime;
+        _counterTime.Clicked -= DisplayTime;
     }
 
     private void DisplayTime()
