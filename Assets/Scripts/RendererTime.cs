@@ -6,6 +6,8 @@ public class RendererTime : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _rendererCount;
     [SerializeField] private CounterTime _counterTime;
 
+    private int _time = 0;
+
     private void OnEnable()
     {
         _counterTime.Clicked += DisplayTime;
@@ -18,7 +20,7 @@ public class RendererTime : MonoBehaviour
 
     private void DisplayTime()
     {
-        int time = _counterTime.Value;
-        _rendererCount.text = time.ToString();
+        _time++;
+        _rendererCount.text = _time.ToString();
     }
 }

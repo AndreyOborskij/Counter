@@ -4,21 +4,18 @@ using UnityEngine;
 
 public class CounterTime : MonoBehaviour
 {
-    private int _value = 0;
     private float _stepInTime = 0.5f;
     private bool _isAction = false;
     private Coroutine _timeFlowCoroutine;
 
     public event Action Clicked;
 
-    public int Value => _value;
-
     private void Update()
     {
-        Action();        
+        Calculate();        
     }
 
-    public void Action()
+    public void Calculate()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -41,8 +38,6 @@ public class CounterTime : MonoBehaviour
 
         while (true)
         {
-            _value++;
-
             Clicked?.Invoke();
 
             yield return wait;
