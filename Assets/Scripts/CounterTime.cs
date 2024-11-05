@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CounterTime : MonoBehaviour
 {
-    private float _stepInTime = 0.5f;
+    private float _stepSecInTime = 0.5f;
     private bool _isAction = false;
     private Coroutine _timeFlowCoroutine;
 
@@ -23,7 +23,7 @@ public class CounterTime : MonoBehaviour
 
             if (_isAction == true) 
             {
-                _timeFlowCoroutine = StartCoroutine(TimeFlow()); 
+                _timeFlowCoroutine = StartCoroutine(FlowingTime()); 
             }
             else
             {
@@ -32,9 +32,9 @@ public class CounterTime : MonoBehaviour
         }
     }
 
-    private IEnumerator TimeFlow()
+    private IEnumerator FlowingTime()
     {
-        var wait = new WaitForSeconds(_stepInTime);
+        var wait = new WaitForSeconds(_stepSecInTime);
 
         while (true)
         {
